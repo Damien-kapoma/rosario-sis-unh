@@ -1,0 +1,490 @@
+/**
+ * UNH RosarioSIS — pages publiques & modules misc (responsive)
+ */
+
+/* ===== Page inscription (index.php) ===== */
+.register #body {
+	padding: 0 !important;
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+.register .postbox {
+	max-width: 100%;
+	margin: 0 auto 24px;
+	border: 0;
+	box-shadow: none;
+	background: transparent;
+}
+
+.register .postbox > thead th {
+	border: 0;
+	background: transparent;
+}
+
+.register .postbox > thead th h3 {
+	text-align: center;
+	font-size: clamp(1rem, 4vw, 1.25rem);
+}
+
+.register-page {
+	display: flex;
+	justify-content: center;
+	padding: clamp(12px, 3vw, 28px) clamp(10px, 3vw, 18px) clamp(24px, 5vw, 42px);
+	background: linear-gradient(180deg, #f7fbff 0%, #eef6ff 100%);
+	box-sizing: border-box;
+	width: 100%;
+}
+
+.register-panel {
+	width: 100%;
+	max-width: min(920px, 100%);
+	border-radius: clamp(14px, 3vw, 24px);
+	overflow: visible;
+	background: #ffffff;
+	box-shadow: 0 28px 90px rgba(15, 23, 42, 0.12);
+	border: 1px solid rgba(15, 23, 42, 0.08);
+	box-sizing: border-box;
+}
+
+.global-login-bar {
+	padding: 16px clamp(14px, 3vw, 28px);
+	text-align: right;
+	border-bottom: 1px solid #e2e8f0;
+	background: #fafbfc;
+}
+
+.global-login-bar .button-primary {
+	display: inline-block;
+	min-width: min(140px, 100%);
+	padding: 12px 20px;
+	min-height: 44px;
+}
+
+.global-login-form {
+	padding: 18px clamp(14px, 3vw, 28px) 22px;
+	background: #f8fafc;
+	border-top: 1px solid #e2e8f0;
+}
+
+.global-login-form form {
+	margin: 0;
+}
+
+.global-login-form .form-row {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+	align-items: stretch;
+}
+
+.global-login-form input[type="email"],
+.global-login-form input[type="password"] {
+	flex: 1 1 180px;
+	min-width: 0;
+	width: 100%;
+	padding: 12px 14px;
+	border: 1px solid #dfe7f2;
+	border-radius: 10px;
+	background: #ffffff;
+	font-size: 16px;
+	min-height: 44px;
+	box-sizing: border-box;
+}
+
+.global-login-form .button-primary {
+	min-width: min(140px, 100%);
+	flex: 0 1 auto;
+	min-height: 44px;
+}
+
+.register-hero {
+	padding: clamp(20px, 4vw, 34px) clamp(16px, 3vw, 28px) clamp(16px, 3vw, 24px);
+	text-align: center;
+	background: linear-gradient(180deg, rgba(37, 99, 235, 0.12), rgba(240, 249, 255, 0.95));
+}
+
+.register-hero .logo {
+	display: block;
+	max-width: min(120px, 28vw);
+	height: auto;
+	margin: 0 auto 18px;
+}
+
+.register-hero h4 {
+	margin: 0;
+	font-size: clamp(1.25rem, 5vw, 1.8rem);
+	line-height: 1.2;
+	color: #0f172a;
+	word-wrap: break-word;
+}
+
+.register-card {
+	padding: clamp(16px, 3vw, 28px);
+	display: grid;
+	gap: 18px;
+}
+
+.register-card .intro {
+	color: #475569;
+	font-size: clamp(0.9rem, 2.5vw, 1rem);
+	line-height: 1.6;
+	margin: 0;
+}
+
+.register-card .field-hint {
+	color: #64748b;
+	font-size: 0.9rem;
+	margin-top: 6px;
+}
+
+.register-card .box.success {
+	border-left: 4px solid #2563eb;
+	background: #eff6ff;
+	padding: 16px 18px;
+	border-radius: 14px;
+	word-wrap: break-word;
+}
+
+.register-code-display {
+	font-size: clamp(1.75rem, 8vw, 2.5rem);
+	font-weight: 800;
+	letter-spacing: clamp(0.15em, 3vw, 0.35em);
+	text-align: center;
+	color: #1d4ed8;
+	margin: 12px 0;
+	padding: 16px;
+	background: #fff;
+	border-radius: 12px;
+	border: 2px dashed #93c5fd;
+	overflow-x: auto;
+}
+
+.register-card label {
+	display: block;
+	font-weight: 700;
+	margin-bottom: 8px;
+}
+
+.register-card .card-title {
+	margin: 0 0 14px;
+	font-size: 1.1rem;
+	font-weight: 700;
+}
+
+.register-card .section-split {
+	display: grid;
+	gap: 24px;
+}
+
+.register-card .form-card,
+.register-card .feature-card,
+.register-card .dashboard-preview {
+	background: #f8fafc;
+	border: 1px solid #e2e8f0;
+	border-radius: 18px;
+	padding: clamp(16px, 3vw, 22px);
+}
+
+.feature-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	gap: 12px;
+}
+
+.feature-list li {
+	position: relative;
+	padding-left: 30px;
+	line-height: 1.5;
+}
+
+.feature-list li::before {
+	content: "✓";
+	position: absolute;
+	left: 0;
+	color: #2563eb;
+	font-weight: 700;
+}
+
+.register-card input,
+.register-card select {
+	width: 100%;
+	min-height: 48px;
+	font-size: 16px;
+	box-sizing: border-box;
+	border-radius: 14px;
+	padding: 14px 16px;
+}
+
+.register-card .button-primary {
+	width: 100%;
+	min-height: 48px;
+	border-radius: 14px;
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+/* ===== Tableau de bord UNH ===== */
+.demo-portal {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 clamp(8px, 2vw, 16px);
+	box-sizing: border-box;
+}
+
+.demo-portal-hero {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 1.5rem;
+	padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 3vw, 1.75rem);
+	border-radius: 12px;
+	color: #fff;
+	background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+	margin-bottom: 1.5rem;
+}
+
+.demo-portal-name {
+	font-size: clamp(1.25rem, 4vw, 1.75rem);
+}
+
+.demo-portal-hero-stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem 1.5rem;
+}
+
+.demo-portal-quick-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(140px, 100%), 1fr));
+	gap: 0.75rem;
+}
+
+.demo-portal-search-wrap {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.75rem 1rem;
+}
+
+#demo-portal-search {
+	flex: 1 1 220px;
+	min-width: 0;
+	max-width: 100%;
+	min-height: 44px;
+	font-size: 16px;
+	padding: 0.65rem 1rem;
+	border-radius: 8px;
+	border: 1px solid #e2e8f0;
+}
+
+.demo-portal-modules {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+	gap: 1rem;
+}
+
+.demo-program-list {
+	max-height: min(220px, 40vh);
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.demo-quick-card {
+	min-height: 44px;
+}
+
+/* ===== Seed / profil misc ===== */
+.demo-seed-panel {
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+.demo-seed-stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.demo-stat-card {
+	flex: 1 1 min(100px, 100%);
+}
+
+.demo-seed-form label {
+	display: block;
+	margin: 0.75rem 0;
+}
+
+.demo-seed-form input[type="text"],
+.demo-seed-form input[type="number"] {
+	display: block;
+	width: 100%;
+	max-width: 280px;
+	margin-top: 0.35rem;
+	min-height: 44px;
+	font-size: 16px;
+	box-sizing: border-box;
+}
+
+.demo-seed-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.demo-seed-actions .button,
+.demo-seed-actions .button-primary {
+	min-height: 44px;
+	flex: 1 1 auto;
+}
+
+.unh-profile-actions input[type="email"] {
+	width: 100%;
+	max-width: 100%;
+	min-height: 44px;
+	font-size: 16px;
+	box-sizing: border-box;
+}
+
+.unh-profile-actions .button,
+.unh-profile-actions .button-primary {
+	min-height: 44px;
+	margin: 4px 4px 4px 0;
+}
+
+/* ===== Breakpoints ===== */
+@media (min-width: 900px) {
+	.register-card .section-split {
+		grid-template-columns: 1fr 0.8fr;
+	}
+}
+
+@media (max-width: 900px) {
+	.global-login-form .form-row {
+		flex-direction: column;
+	}
+
+	.global-login-form .button-primary {
+		width: 100%;
+	}
+}
+
+@media (max-width: 768px) {
+	.register .postbox-wrapper {
+		overflow-x: hidden;
+	}
+
+	.global-login-bar {
+		text-align: center;
+	}
+
+	.global-login-bar .button-primary {
+		width: 100%;
+	}
+
+	.demo-seed-actions .button,
+	.demo-seed-actions .button-primary {
+		width: 100%;
+	}
+
+	.unh-profile-actions .button,
+	.unh-profile-actions .button-primary {
+		width: 100%;
+		margin: 6px 0;
+	}
+}
+
+@media (max-width: 480px) {
+	.register-code-display {
+		letter-spacing: 0.2em;
+	}
+
+	.demo-portal-hero-stats {
+		width: 100%;
+		justify-content: space-around;
+	}
+}
+
+/* ===== Thème clair forcé (lisibilité au défilement) ===== */
+html.unh-light-theme {
+	color-scheme: light;
+}
+
+html.unh-light-theme,
+html.unh-light-theme body {
+	background: #f1f5f9 !important;
+	color: #0f172a !important;
+}
+
+html.unh-light-theme .postbox,
+html.unh-light-theme .widefat,
+html.unh-light-theme .card,
+html.unh-light-theme #search,
+html.unh-light-theme .register-panel,
+html.unh-light-theme .register-card .form-card,
+html.unh-light-theme .register-card .feature-card,
+html.unh-light-theme .demo-module-card,
+html.unh-light-theme .demo-seed-panel {
+	background: #ffffff !important;
+	color: #0f172a !important;
+	border-color: #e2e8f0 !important;
+}
+
+html.unh-light-theme .widefat th,
+html.unh-light-theme .widefat td,
+html.unh-light-theme .postbox > thead th,
+html.unh-light-theme label,
+html.unh-light-theme p,
+html.unh-light-theme li,
+html.unh-light-theme h1,
+html.unh-light-theme h2,
+html.unh-light-theme h3,
+html.unh-light-theme h4,
+html.unh-light-theme h5,
+html.unh-light-theme .field-hint {
+	color: #0f172a !important;
+}
+
+html.unh-light-theme .widefat tr:nth-child(odd),
+html.unh-light-theme .alternate {
+	background: #f8fafc !important;
+}
+
+html.unh-light-theme input,
+html.unh-light-theme select,
+html.unh-light-theme textarea {
+	background: #ffffff !important;
+	color: #0f172a !important;
+	border-color: #cbd5e1 !important;
+}
+
+html.unh-light-theme .register-page {
+	background: linear-gradient(180deg, #f7fbff 0%, #eef6ff 100%) !important;
+}
+
+html.unh-light-theme .unh-student-fields {
+	margin-top: 1rem;
+	padding: 1rem 0 0;
+	border: 0;
+	border-top: 1px solid #e2e8f0;
+}
+
+html.unh-light-theme .unh-student-fields legend {
+	font-weight: 700;
+	color: #1e40af;
+	padding: 0 8px;
+}
+
+html.unh-light-theme .unh-fields-note {
+	margin: 0.75rem 0 0;
+}
+
+/* En-têtes fixes : fond opaque pour ne pas masquer le texte */
+html.unh-light-theme #menu,
+html.unh-light-theme .header2,
+html.unh-light-theme thead th {
+	background-color: #ffffff !important;
+}

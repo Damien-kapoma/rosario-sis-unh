@@ -24,7 +24,7 @@ function HackingLog()
 {
 	global $error;
 
-	$redirect_url = 'Modules.php?modname=misc/Portal.php';
+	$redirect_url = 'index.php';
 
 	// Log Hacking time in session.
 	$_SESSION['HackingLog'][] = time();

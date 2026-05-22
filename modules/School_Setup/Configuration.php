@@ -126,9 +126,8 @@ else
 					$numeric_columns = [
 						'ATTENDANCE_EDIT_DAYS_BEFORE',
 						'ATTENDANCE_EDIT_DAYS_AFTER',
-						'FOOD_SERVICE_BALANCE_WARNING',
-						'FOOD_SERVICE_BALANCE_MINIMUM',
-						'FOOD_SERVICE_BALANCE_TARGET',
+						'ATTENDANCE_EXAM_ELIGIBILITY_THRESHOLD',
+						'TEACHER_DAILY_HOURS_LIMIT',
 					];
 
 					if ( in_array( $column, $numeric_columns )
@@ -782,8 +781,25 @@ else
 				'<div class="tooltip"><i>' .
 				_( 'Leave the field blank to always allow' ) .
 				'</i></div>',
-				' type="number" min="1" max="99"'
-			) . '</td></tr></table>';
+				' type="number" min="1" max="99"'		) . '</td></tr>';
+
+		echo '<tr><td>' . TextInput(
+			ProgramConfig( 'attendance', 'ATTENDANCE_EXAM_ELIGIBILITY_THRESHOLD' ) ?: '25',
+			'values[program_config][attendance][ATTENDANCE_EXAM_ELIGIBILITY_THRESHOLD]',
+			_( 'Maximum absence percentage for exam eligibility (%)' ) .
+			'<div class="tooltip"><i>' .
+			_( 'Students exceeding this absence percentage will be ineligible for exams. Default: 25%' ) .
+			'</i></div>',
+			' type="number" min="0" max="100"'			) . '</td></tr>';
+
+		echo '<tr><td>' . TextInput(
+			ProgramConfig( 'attendance', 'TEACHER_DAILY_HOURS_LIMIT' ) ?: '8',
+			'values[program_config][attendance][TEACHER_DAILY_HOURS_LIMIT]',
+			_( 'Maximum daily hours for teachers' ) .
+			'<div class="tooltip"><i>' .
+			_( 'Teachers cannot be scheduled for more than this number of hours per day. Default: 8 hours' ) .
+			'</i></div>',
+			' type="number" min="1" max="24"'			) . '</td></tr></table>';
 		}
 
 		if ( $_REQUEST['tab'] === 'food_service' )

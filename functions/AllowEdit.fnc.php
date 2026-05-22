@@ -216,17 +216,28 @@ function AllowUse( $modname = false, $cache_all = false )
 	 *
 	 * @link http://www.securiteam.com/securitynews/6S02U1P6BI.html
 	 */
-	$allow_misc = [
-		'misc/ChooseRequest.php',
-		'misc/ChooseCourse.php',
+	$allow_misc_public = [
 		'misc/Portal.php',
-		'misc/ViewContact.php',
+		'misc/DemoPortal.php',
+		'misc/Profile.php',
 	];
 
-	if ( in_array( $modname, $allow_misc ) )
+	$allow_misc_admin = [
+		'misc/SeedTestData.php',
+		'misc/SetDemoPasswords.php',
+		'misc/AddDemoEnrollment.php',
+		'misc/AutoLoginDemo.php',
+		'misc/MarkPresence.php',
+	];
+
+	if ( in_array( $modname, $allow_misc_public, true ) )
 	{
-		// @since 12.4 Security: allow everyone to use Portal, allow admin only to use popups
-		return $modname === 'misc/Portal.php' || User( 'PROFILE' ) === 'admin';
+		return ! empty( $_SESSION['STAFF_ID'] ) || ! empty( $_SESSION['STUDENT_ID'] );
+	}
+
+	if ( in_array( $modname, $allow_misc_admin, true ) )
+	{
+		return User( 'PROFILE' ) === 'admin';
 	}
 
 	if ( isset( $_REQUEST['modname'] ) && $modname === $_REQUEST['modname'] )

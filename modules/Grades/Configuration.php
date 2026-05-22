@@ -230,21 +230,6 @@ echo '<tr><td>' . TextInput(
 
 echo '</table></fieldset><br />';
 
-if ( $RosarioModules['Eligibility'] )
-{
-	echo '<fieldset><legend>' . _( 'Eligibility' ) . '</legend><table>';
-
-	echo '<tr><td>' . CheckboxInput(
-		( array_key_exists( 'ELIGIBILITY_CUMULITIVE', $gradebook_config ) ? $gradebook_config['ELIGIBILITY_CUMULITIVE'] : '' ),
-		'values[ELIGIBILITY_CUMULITIVE]',
-		_( 'Calculate Eligibility using Cumulative Semester Grades' ),
-		'',
-		( ! array_key_exists( 'ELIGIBILITY_CUMULITIVE', $gradebook_config ) )
-	) . '</td></tr>';
-
-	echo '</table></fieldset><br />';
-}
-
 $comment_codes_RET = DBGet( "SELECT rccs.ID,rccs.TITLE,rccc.TITLE AS CODE_TITLE
 FROM report_card_comment_code_scales rccs,report_card_comment_codes rccc
 WHERE rccs.SCHOOL_ID='" . UserSchool() . "'

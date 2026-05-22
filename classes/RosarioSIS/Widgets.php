@@ -304,19 +304,6 @@ class Widgets
 			$this->wrapFooter();
 		}
 
-		// Eligibility.
-		if ( $RosarioModules['Eligibility']
-			&& ( ! $this->isBuilt( 'eligibility' )
-				|| ! $this->isBuilt( 'activity' ) ) )
-		{
-			$this->wrapHeader( _( 'Eligibility' ) );
-
-			$this->build( 'eligibility' );
-			$this->build( 'activity' );
-
-			$this->wrapFooter();
-		}
-
 		// Food Service.
 		if ( $RosarioModules['Food_Service']
 			&& ( ! $this->isBuilt( 'fsa_balance' )

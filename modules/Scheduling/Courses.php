@@ -985,6 +985,32 @@ if (  ( ! $_REQUEST['modfunc']
 					$warning[] = _( 'Conflict: Secondary Teacher already scheduled for this period.' );
 				}
 
+				if ( AllowEdit() && $RET['TEACHER_ID'] )
+				{
+					$daily_hours = CoursePeriodTeacherDailyHoursLimitCheck( $RET['TEACHER_ID'], $_REQUEST['course_period_id'] );
+					if ( $daily_hours['exceeded'] )
+					{
+						$warning[] = sprintf( _( 'Limit: Teacher is scheduled for %s hours on %s, exceeding the %s hour daily limit.' ),
+							$daily_hours['hours'],
+							$daily_hours['day'],
+							$daily_hours['limit']
+						);
+					}
+				}
+
+				if ( AllowEdit() && $RET['SECONDARY_TEACHER_ID'] )
+				{
+					$daily_hours = CoursePeriodTeacherDailyHoursLimitCheck( $RET['SECONDARY_TEACHER_ID'], $_REQUEST['course_period_id'] );
+					if ( $daily_hours['exceeded'] )
+					{
+						$warning[] = sprintf( _( 'Limit: Secondary Teacher is scheduled for %s hours on %s, exceeding the %s hour daily limit.' ),
+							$daily_hours['hours'],
+							$daily_hours['day'],
+							$daily_hours['limit']
+						);
+					}
+				}
+
 				echo ErrorMessage( $warning, 'warning' );
 			}
 			else

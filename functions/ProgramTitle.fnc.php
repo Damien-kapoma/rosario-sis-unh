@@ -32,13 +32,6 @@ function ProgramTitle( $modname = '' )
 		$modname = $_REQUEST['modname'];
 	}
 
-	if ( $modname === 'misc/Portal.php' )
-	{
-		$_ROSARIO['HeaderIcon'] = 'misc';
-
-		return ParseMLField( Config( 'TITLE' ) );
-	}
-
 	$module = mb_substr( $modname, 0, mb_strpos( $modname, '/' ) );
 
 	// Get right module for Teacher Programs.

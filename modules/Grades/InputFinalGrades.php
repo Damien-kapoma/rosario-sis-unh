@@ -3,6 +3,7 @@
 require_once 'modules/Grades/includes/ClassRank.inc.php';
 require_once 'modules/Grades/includes/Grades.fnc.php';
 require_once 'modules/Grades/includes/FinalGrades.inc.php';
+require_once 'modules/Attendance/includes/ExamEligibility.fnc.php';
 require_once 'ProgramFunctions/TipMessage.fnc.php';
 
 if ( ! empty( $_REQUEST['period'] ) )
@@ -366,6 +367,22 @@ if ( $_REQUEST['modfunc'] === 'save' )
 		if ( ! empty( $current_RET[$student_id] ) )
 		{
 			$update_columns = [];
+
+			$eligibility = AttendanceStudentIsExamEligible( $student_id );
+
+			if ( ! $eligibility['eligible']
+				&& ( ! empty( $columns['grade'] )
+				|| ( isset( $columns['percent'] ) && $columns['percent'] != '' ) ) )
+			{
+				$student_name = DBGetOne( "SELECT " . DisplayNameSQL( 's' ) . " AS FULL_NAME FROM students s WHERE s.STUDENT_ID='" . (int) $student_id . "'" );
+
+				$error[ $student_name ?: $student_id ] = sprintf(
+					_( 'Final grades cannot be saved for %s because the student is ineligible for exams.' ),
+					$student_name ?: $student_id
+				);
+
+				continue;
+			}
 
 			if ( isset( $columns['percent'] )
 				&& $columns['percent'] != '' )
@@ -977,6 +994,7 @@ $extra['SELECT'] = ",ssm.STUDENT_ID AS REPORT_CARD_GRADE";
 $extra['functions'] = [
 	'FULL_NAME' => 'makePhotoTipMessage',
 	'REPORT_CARD_GRADE' => '_makeLetterPercent',
+	'EXAM_ELIGIBILITY' => '_makeExamEligibility',
 ];
 
 if ( GetMP( $_REQUEST['mp'], 'DOES_COMMENTS' ) == 'Y' )
@@ -1220,7 +1238,7 @@ else
 echo ErrorMessage( $error );
 echo ErrorMessage( $warning, 'warning' );
 
-$LO_columns = [ 'FULL_NAME' => _( 'Student' ), 'STUDENT_ID' => sprintf( _( '%s ID' ), Config( 'NAME' ) ) ];
+$LO_columns = [ 'FULL_NAME' => _( 'Student' ), 'STUDENT_ID' => sprintf( _( '%s ID' ), Config( 'NAME' ) ), 'EXAM_ELIGIBILITY' => _( 'Exam Eligibility' ) ];
 
 if ( $_REQUEST['include_inactive'] == 'Y' )
 {
@@ -1319,6 +1337,8 @@ function _makeLetterPercent( $student_id, $column )
 {
 	global $current_RET, $import_RET, $grades_select, $student_count;
 
+	$eligibility = AttendanceStudentIsExamEligible( $student_id );
+
 	if ( ! empty( $import_RET[$student_id] ) )
 	{
 		$select_percent = $import_RET[$student_id][1]['GRADE_PERCENT'];
@@ -1338,6 +1358,28 @@ function _makeLetterPercent( $student_id, $column )
 		}
 
 		$div = true;
+	}
+
+	if ( ! $eligibility['eligible'] )
+	{
+		if ( ! isset( $_REQUEST['_ROSARIO_PDF'] ) )
+		{
+			$return = '<span class="warning">' . _( 'Ineligible for exams' ) . '</span>';
+
+			if ( $select_percent !== '' || $select_grade )
+			{
+				$return .= '<br /><span class="size-1">' .
+					( $select_grade ? ( isset( $grades_select[$select_grade] ) ? $grades_select[$select_grade][1] : $select_grade ) : '' ) .
+					( $select_percent !== '' ? ' ' . $select_percent . '%' : '' ) .
+				'</span>';
+			}
+		}
+		else
+		{
+			$return = '<span class="warning">' . _( 'Ineligible for exams' ) . '</span>';
+		}
+
+		return '<!--' . $select_percent . '-->' . $return;
 	}
 
 	if ( ! isset( $_REQUEST['_ROSARIO_PDF'] ) )
@@ -1443,6 +1485,31 @@ function _makeLetterPercent( $student_id, $column )
 	}
 
 	return $return;
+}
+
+/**
+ * @param $value
+ * @param $column
+ * @return mixed
+ */
+function _makeExamEligibility( $value, $column )
+{
+	$eligibility = AttendanceStudentIsExamEligible( $value );
+
+	if ( ! $eligibility['eligible'] )
+	{
+		return sprintf(
+			_( '<span class="warning">Ineligible for exams (%s%% absence &gt; %s%% threshold)</span>' ),
+			$eligibility['absence_percent'],
+			$eligibility['threshold']
+		);
+	}
+
+	return sprintf(
+		_( '<span class="info">Eligible for exams (%s%% absence ≤ %s%% threshold)</span>' ),
+		$eligibility['absence_percent'],
+		$eligibility['threshold']
+	);
 }
 
 /**

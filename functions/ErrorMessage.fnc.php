@@ -121,7 +121,17 @@ function ErrorSendEmail( $error = [], $title = 'PHP Fatal error' )
 
 	chdir( dirname( __FILE__ ) . '/../' );
 
-	require_once 'ProgramFunctions/SendEmail.fnc.php';
+	// Attempt to load program-specific SendEmail wrapper; if missing, skip to avoid fatal error.
+	$send_file = dirname( __FILE__ ) . '/../ProgramFunctions/SendEmail.fnc.php';
+	if ( file_exists( $send_file ) )
+	{
+		require_once $send_file;
+	}
+	else
+	{
+		// If SendEmail implementation is not available, avoid throwing a fatal error.
+		return false;
+	}
 
 	if ( ! $error )
 	{

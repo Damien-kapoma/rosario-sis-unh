@@ -134,11 +134,6 @@ $tables_tooltip = [
 
 $no_school_tables = [ 'schools' => true, 'student_enrollment_codes' => true, 'staff' => true, 'program_config' => true ];
 
-if ( $RosarioModules['Eligibility'] )
-{
-	$tables += [ 'eligibility_activities' => _( 'Eligibility Activities' ) ];
-}
-
 if ( $RosarioModules['Food_Service'] )
 {
 	$tables += [ 'food_service_staff_accounts' => _( 'Food Service Staff Accounts' ) ];

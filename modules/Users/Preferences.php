@@ -740,11 +740,6 @@ if ( ! $_REQUEST['modfunc'] )
 			];
 		}
 
-		if ( $RosarioModules['Eligibility'] )
-		{
-			$widgets += [ 'eligibility' => _( 'Eligibility' ), 'activity' => _( 'Activity' ) ];
-		}
-
 		if ( $RosarioModules['Food_Service'] )
 		{
 			$widgets += [

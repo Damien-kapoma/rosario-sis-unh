@@ -600,8 +600,7 @@ else
 if ( $_REQUEST['modfunc'] === 'delete'
 	&& basename( $_SERVER['PHP_SELF'] ) !== 'index.php'
 	&& UserStaffID() !== User( 'STAFF_ID' )
-	&& User( 'PROFILE' ) === 'admin'
-	&& AllowEdit() )
+	&& AllowDelete( 'user' ) )
 {
 	if ( DeletePrompt( _( 'User' ) ) )
 	{
@@ -719,8 +718,7 @@ if (  ( UserStaffID()
 		{
 			if ( UserStaffID()
 				&& UserStaffID() !== User( 'STAFF_ID' )
-				&& User( 'PROFILE' ) === 'admin'
-				&& AllowEdit() )
+				&& AllowDelete( 'user' ) )
 			{
 				// @since 5.0 Cannot delete teacher if has course periods.
 				$can_delete = DBTransDryRun( UserDeleteSQL( UserStaffID() ) );

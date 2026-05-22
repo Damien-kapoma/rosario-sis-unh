@@ -29,7 +29,6 @@ $always_activated = [
 ];
 
 $directories_bypass = [
-	'modules/misc',
 ];
 
 //hacking protections

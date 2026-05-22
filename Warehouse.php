@@ -515,13 +515,10 @@ $RosarioCoreModules = [
 	'Scheduling',
 	'Grades',
 	'Attendance',
-	'Eligibility',
 	'Discipline',
 	'Accounting',
 	'Student_Billing',
-	'Food_Service',
 	'Resources',
-	'Custom',
 ];
 
 $RosarioModules = unserialize( Config( 'MODULES' ) );
@@ -677,16 +674,21 @@ function Warehouse( $mode )
 			$stylesheet_css_hash = hash( 'adler32', filemtime( $stylesheet_css ) );
 			?>
 <!doctype html>
-<html lang="<?php echo $lang_2_chars; ?>"<?php echo $dir_RTL; ?>>
+<html lang="<?php echo $lang_2_chars; ?>" class="unh-light-theme"<?php echo $dir_RTL; ?>>
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<title><?php echo ParseMLField( Config( 'TITLE' ) ); ?></title>
 	<link rel="icon" href="favicon.ico" sizes="32x32">
 	<link rel="icon" href="apple-touch-icon.png" sizes="128x128">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="mobile-web-app-capable" content="yes">
 	<link rel="stylesheet" href="<?php echo $stylesheet_css; ?>?<?php echo $stylesheet_css_hash; ?>">
+	<link rel="stylesheet" href="assets/themes/<?php echo Preferences( 'THEME' ); ?>/css/modern-enhancement.css?v=1.0">
+	<link rel="stylesheet" href="assets/themes/<?php echo Preferences( 'THEME' ); ?>/css/ui-components.css?v=1.0">
+	<link rel="stylesheet" href="assets/themes/<?php echo Preferences( 'THEME' ); ?>/css/responsive.css?v=1.3">
+	<link rel="stylesheet" href="assets/themes/<?php echo Preferences( 'THEME' ); ?>/css/demo-portal.css?v=1.2">
+	<link rel="stylesheet" href="assets/themes/<?php echo Preferences( 'THEME' ); ?>/css/unh-pages.css?v=1.3">
 	<style>.highlight,.highlight-hover:hover{background-color:<?php echo Preferences( 'HIGHLIGHT' ); ?> !important;}</style>
 	<?php
 

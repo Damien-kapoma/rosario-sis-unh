@@ -596,8 +596,7 @@ else
 
 if ( $_REQUEST['modfunc'] === 'delete'
 	&& basename( $_SERVER['PHP_SELF'] ) !== 'index.php'
-	&& User( 'PROFILE' ) === 'admin'
-	&& AllowEdit() )
+	&& AllowDelete( 'student' ) )
 {
 	if ( DeletePrompt( _( 'Student' ) ) )
 	{
@@ -746,8 +745,7 @@ if (  ( UserStudentID()
 			'&category_id=' . $category_id . '&student_id=' . UserStudentID() . '&modfunc=update';
 
 			if ( UserStudentID()
-				&& User( 'PROFILE' ) === 'admin'
-				&& AllowEdit() )
+				&& AllowDelete( 'student' ) )
 			{
 				// Can't delete Student if has Schedule, Attendance, Grades,
 				// Discipline, Billing records, etc.

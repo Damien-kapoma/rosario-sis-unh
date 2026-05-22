@@ -1,0 +1,292 @@
+/**
+ * UNH Demo Portal — interactive dashboard
+ */
+
+.demo-portal {
+	--demo-primary: #1e40af;
+	--demo-primary-light: #3b82f6;
+	--demo-surface: #f8fafc;
+	--demo-card: #fff;
+	--demo-border: #e2e8f0;
+	--demo-text: #0f172a;
+	--demo-muted: #64748b;
+	font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	color: var(--demo-text);
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.demo-portal-hero {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 1.5rem;
+	padding: 1.5rem 1.75rem;
+	background: linear-gradient(135deg, var(--demo-primary) 0%, var(--demo-primary-light) 100%);
+	border-radius: 12px;
+	color: #fff;
+	margin-bottom: 1.5rem;
+}
+
+.demo-portal-welcome {
+	margin: 0;
+	opacity: 0.9;
+	font-size: 0.95rem;
+}
+
+.demo-portal-name {
+	margin: 0.25rem 0 0.5rem;
+	font-size: 1.75rem;
+	font-weight: 700;
+}
+
+.demo-portal-badge {
+	display: inline-block;
+	background: rgba(255, 255, 255, 0.2);
+	padding: 0.25rem 0.75rem;
+	border-radius: 999px;
+	font-size: 0.85rem;
+}
+
+.demo-portal-hero-stats {
+	display: flex;
+	gap: 1.5rem;
+}
+
+.demo-portal-hero-stats div {
+	text-align: center;
+}
+
+.demo-portal-hero-stats strong {
+	display: block;
+	font-size: 1.5rem;
+}
+
+.demo-portal-hero-stats span {
+	font-size: 0.8rem;
+	opacity: 0.9;
+}
+
+.demo-portal-hint {
+	margin-bottom: 1.25rem;
+	padding: 1rem 1.25rem;
+	border-radius: 8px;
+}
+
+.demo-portal-quick h3,
+.demo-portal-explore h3 {
+	margin: 0 0 1rem;
+	font-size: 1.1rem;
+	color: var(--demo-primary);
+}
+
+.demo-portal-quick-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+	gap: 0.75rem;
+	margin-bottom: 2rem;
+}
+
+.demo-quick-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 1rem;
+	background: var(--demo-card);
+	border: 1px solid var(--demo-border);
+	border-radius: 10px;
+	text-decoration: none;
+	color: var(--demo-text);
+	transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.demo-quick-card:hover {
+	border-color: var(--demo-primary-light);
+	box-shadow: 0 4px 14px rgba(30, 64, 175, 0.15);
+	transform: translateY(-2px);
+}
+
+.demo-quick-icon {
+	font-size: 1.75rem;
+}
+
+.demo-quick-title {
+	font-size: 0.9rem;
+	font-weight: 600;
+	text-align: center;
+}
+
+.demo-portal-search-wrap {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 1.25rem;
+}
+
+#demo-portal-search {
+	flex: 1;
+	max-width: 480px;
+	padding: 0.65rem 1rem;
+	border: 1px solid var(--demo-border);
+	border-radius: 8px;
+	font-size: 1rem;
+}
+
+#demo-portal-search:focus {
+	outline: 2px solid var(--demo-primary-light);
+	border-color: var(--demo-primary-light);
+}
+
+#demo-portal-search-count {
+	color: var(--demo-muted);
+	font-size: 0.9rem;
+}
+
+.demo-portal-modules {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 1rem;
+}
+
+.demo-module-card {
+	background: var(--demo-card);
+	border: 1px solid var(--demo-border);
+	border-radius: 10px;
+	overflow: visible;
+}
+
+.demo-module-header {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.85rem 1rem;
+	background: var(--demo-surface);
+	border-bottom: 1px solid var(--demo-border);
+}
+
+.demo-module-header h4 {
+	flex: 1;
+	margin: 0;
+	font-size: 1rem;
+}
+
+.demo-module-count {
+	background: var(--demo-primary);
+	color: #fff;
+	font-size: 0.75rem;
+	padding: 0.15rem 0.5rem;
+	border-radius: 999px;
+}
+
+.demo-program-list {
+	list-style: none;
+	margin: 0;
+	padding: 0.5rem 0;
+	max-height: 220px;
+	overflow-y: auto;
+}
+
+.demo-program-list li a {
+	display: block;
+	padding: 0.4rem 1rem;
+	color: var(--demo-text);
+	text-decoration: none;
+	font-size: 0.9rem;
+}
+
+.demo-program-list li a:hover {
+	background: #eff6ff;
+	color: var(--demo-primary);
+}
+
+/* Seed panel */
+.demo-seed-panel {
+	max-width: 720px;
+}
+
+.demo-seed-intro {
+	line-height: 1.5;
+	margin-bottom: 1.25rem;
+}
+
+.demo-seed-stats {
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 1.5rem;
+	flex-wrap: wrap;
+}
+
+.demo-stat-card {
+	flex: 1;
+	min-width: 100px;
+	text-align: center;
+	padding: 1rem;
+	background: #f1f5f9;
+	border-radius: 8px;
+}
+
+.demo-stat-num {
+	display: block;
+	font-size: 1.75rem;
+	font-weight: 700;
+	color: #1e40af;
+}
+
+.demo-stat-label {
+	font-size: 0.85rem;
+	color: #64748b;
+}
+
+.demo-seed-form fieldset {
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	padding: 1rem;
+	margin-bottom: 1rem;
+}
+
+.demo-seed-form label {
+	display: block;
+	margin: 0.5rem 0;
+}
+
+.demo-seed-form input[type="text"],
+.demo-seed-form input[type="number"] {
+	margin-left: 0.5rem;
+	padding: 0.4rem 0.6rem;
+	border: 1px solid #cbd5e1;
+	border-radius: 4px;
+}
+
+.demo-seed-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+@media (max-width: 1024px) {
+	.demo-module-header h4 {
+		font-size: 0.95rem;
+	}
+}
+
+@media (max-width: 640px) {
+	.demo-portal-hero {
+		flex-direction: column;
+	}
+
+	.demo-portal-modules {
+		grid-template-columns: 1fr;
+	}
+
+	.demo-portal-quick-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 380px) {
+	.demo-portal-quick-grid {
+		grid-template-columns: 1fr;
+	}
+}

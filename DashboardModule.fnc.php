@@ -256,23 +256,6 @@ if ( ! function_exists( 'DashboardAttendance' ) )
 	}
 }
 
-if ( ! function_exists( 'DashboardEligibility' ) )
-{
-	/**
-	 * Dashboard Activities module
-	 *
-	 * @since 4.0
-	 *
-	 * @return string Dashboard module HTML.
-	 */
-	function DashboardEligibility()
-	{
-		require_once 'modules/Eligibility/includes/Dashboard.inc.php';
-
-		return DashboardDefaultEligibility();
-	}
-}
-
 if ( ! function_exists( 'DashboardDiscipline' ) )
 {
 	/**

@@ -391,7 +391,7 @@ if ( ! isset( $_REQUEST['sidefunc'] )
 
 	<?php // User Information. ?>
 
-	<a href="Modules.php?modname=misc/Portal.php" class="center">
+	<a href="index.php" class="center">
 		<img src="assets/themes/<?php echo Preferences( 'THEME' ); ?>/logo.png" class="logo" alt="Logo">
 	</a>
 	<form action="Side.php?sidefunc=update" method="POST" target="menu-top">

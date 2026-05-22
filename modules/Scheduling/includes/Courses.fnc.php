@@ -94,8 +94,129 @@ function CoursePeriodTeacherConflictCheck( $teacher_id, $course_period_id )
 	return false;
 }
 
+/**
+ * Check for Teacher Daily Hours limit violation
+ *
+ * @param int   $teacher_id       Teacher ID.
+ * @param int   $course_period_id Course Period ID.
+ * @param float $limit            Maximum hours per day.
+ *
+ * @return array
+ */
+function CoursePeriodTeacherDailyHoursLimitCheck( $teacher_id, $course_period_id, $limit = null )
+{
+	if ( ! $teacher_id
+		|| ! $course_period_id )
+	{
+		return [ 'exceeded' => false, 'day' => null, 'minutes' => 0, 'hours' => 0, 'limit' => 0 ];
+	}
 
+	if ( $limit === null )
+	{
+		$limit = (float) ( ProgramConfig( 'attendance', 'TEACHER_DAILY_HOURS_LIMIT' ) ?: 8 );
+	}
 
+	if ( $limit <= 0 )
+	{
+		return [ 'exceeded' => false, 'day' => null, 'minutes' => 0, 'hours' => 0, 'limit' => $limit ];
+	}
+
+	$this_school_periods_RET = DBGet( "SELECT cpsp.PERIOD_ID,cpsp.DAYS,cp.MARKING_PERIOD_ID
+		FROM course_period_school_periods cpsp,course_periods cp
+		WHERE cpsp.COURSE_PERIOD_ID=cp.COURSE_PERIOD_ID
+		AND cp.SYEAR='" . UserSyear() . "'
+		AND cp.SCHOOL_ID='" . UserSchool() . "'
+		AND cp.COURSE_PERIOD_ID='" . (int) $course_period_id . "'" );
+
+	if ( empty( $this_school_periods_RET[1]['MARKING_PERIOD_ID'] ) )
+	{
+		return [ 'exceeded' => false, 'day' => null, 'minutes' => 0, 'hours' => 0, 'limit' => $limit ];
+	}
+
+	$all_mp = GetAllMP(
+		GetMP( $this_school_periods_RET[1]['MARKING_PERIOD_ID'], 'MP' ),
+		$this_school_periods_RET[1]['MARKING_PERIOD_ID']
+	);
+
+	if ( ! $all_mp )
+	{
+		return [ 'exceeded' => false, 'day' => null, 'minutes' => 0, 'hours' => 0, 'limit' => $limit ];
+	}
+
+	$school_periods_RET = DBGet( "SELECT cpsp.PERIOD_ID,cpsp.DAYS,cp.COURSE_PERIOD_ID
+		FROM course_period_school_periods cpsp,course_periods cp
+		WHERE cpsp.COURSE_PERIOD_ID=cp.COURSE_PERIOD_ID
+		AND cp.SYEAR='" . UserSyear() . "'
+		AND cp.SCHOOL_ID='" . UserSchool() . "'
+		AND (TEACHER_ID='" . (int) $teacher_id . "'
+			OR SECONDARY_TEACHER_ID='" . (int) $teacher_id . "')
+		AND cp.COURSE_PERIOD_ID<>'" . (int) $course_period_id . "'
+		AND cp.MARKING_PERIOD_ID IN(" . $all_mp . ")" );
+
+	$day_minutes = [];
+
+	foreach ( (array) $school_periods_RET as $school_period )
+	{
+		$period_length = DBGetOne( "SELECT LENGTH
+			FROM school_periods
+			WHERE PERIOD_ID='" . (int) $school_period['PERIOD_ID'] . "'
+			AND SCHOOL_ID='" . UserSchool() . "'" );
+
+		if ( ! $period_length )
+		{
+			continue;
+		}
+
+		foreach ( str_split( $school_period['DAYS'] ) as $day )
+		{
+			if ( ! $day )
+			{
+				continue;
+			}
+
+			$day_minutes[ $day ] = ( isset( $day_minutes[ $day ] ) ? $day_minutes[ $day ] : 0 ) + $period_length;
+		}
+	}
+
+	foreach ( (array) $this_school_periods_RET as $current_school_period )
+	{
+		$period_length = DBGetOne( "SELECT LENGTH
+			FROM school_periods
+			WHERE PERIOD_ID='" . (int) $current_school_period['PERIOD_ID'] . "'
+			AND SCHOOL_ID='" . UserSchool() . "'" );
+
+		if ( ! $period_length )
+		{
+			continue;
+		}
+
+		foreach ( str_split( $current_school_period['DAYS'] ) as $day )
+		{
+			if ( ! $day )
+			{
+				continue;
+			}
+
+			$day_minutes[ $day ] = ( isset( $day_minutes[ $day ] ) ? $day_minutes[ $day ] : 0 ) + $period_length;
+		}
+	}
+
+	foreach ( $day_minutes as $day => $minutes )
+	{
+		if ( $minutes > $limit * 60 )
+		{
+			return [
+				'exceeded' => true,
+				'day' => $day,
+				'minutes' => $minutes,
+				'hours' => round( $minutes / 60, 2 ),
+				'limit' => $limit,
+			];
+		}
+	}
+
+	return [ 'exceeded' => false, 'day' => null, 'minutes' => 0, 'hours' => 0, 'limit' => $limit ];
+}
 
 /**
  * Course Period Takes Attendance input
